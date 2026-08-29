@@ -1,0 +1,11 @@
+# FireGuard code ownership
+# The repository owner is the initial architecture and integration owner.
+
+* @greyhatk1
+
+# Safety-sensitive code gets explicit owner review.
+/safety/ @greyhatk1
+/robotics/ @greyhatk1
+/docs/architecture/ @greyhatk1
+/packages/schemas/ @greyhatk1
+/packages/events/ @greyhatk1
