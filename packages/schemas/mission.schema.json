@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fireguard.local/schemas/mission.schema.json",
+  "title": "FireGuard Mission",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["mission_id", "property_id", "zone_id", "task_type", "priority", "status", "authorization_state"],
+  "properties": {
+    "mission_id": {"type": "string", "minLength": 1},
+    "property_id": {"type": "string", "minLength": 1},
+    "zone_id": {"type": "string", "minLength": 1},
+    "task_type": {"type": "string", "enum": ["inspect", "mow", "vegetation_treatment", "verify"]},
+    "priority": {"type": "string", "enum": ["low", "medium", "high", "critical"]},
+    "required_capabilities": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "status": {"type": "string", "enum": ["detected", "analyzing", "recommended", "awaiting_approval", "approved", "assigned", "executing", "paused", "cancelled", "completed", "failed", "verifying"]},
+    "authorization_state": {"type": "string", "enum": ["not_required", "pending", "approved", "denied", "expired"]},
+    "created_at": {"type": "string", "format": "date-time"},
+    "updated_at": {"type": "string", "format": "date-time"}
+  }
+}
