@@ -1,0 +1,49 @@
+name: FireGuard CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  repository-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate required architecture files
+        shell: bash
+        run: |
+          set -euo pipefail
+          required=(
+            README.md
+            AGENTS.md
+            CONTRIBUTING.md
+            CODEOWNERS
+            docs/architecture/system.md
+            docs/architecture/module-boundaries.md
+            docs/architecture/data-model.md
+            docs/architecture/events.md
+            docs/architecture/safety.md
+            docs/architecture/security.md
+            docs/agents/agent-registry.md
+            docs/agents/agent-rules.md
+            docs/decisions/ADR-001-modular-architecture.md
+          )
+          for file in "${required[@]}"; do
+            test -f "$file" || { echo "Missing required file: $file"; exit 1; }
+          done
+
+      - name: Scan for obvious secret filenames
+        shell: bash
+        run: |
+          set -euo pipefail
+          if find . -type f \( -name '.env' -o -name '*.pem' -o -name '*.key' \) -not -path './.git/*' | grep -q .; then
+            echo 'Potential secret file detected.'
+            exit 1
+          fi
