@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fireguard.local/schemas/risk-assessment.schema.json",
+  "title": "FireGuard Risk Assessment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["assessment_id", "zone_id", "level", "score", "factors", "recommendation", "confidence", "timestamp"],
+  "properties": {
+    "assessment_id": {"type": "string", "minLength": 1},
+    "zone_id": {"type": "string", "minLength": 1},
+    "level": {"type": "string", "enum": ["low", "medium", "high", "critical"]},
+    "score": {"type": "number", "minimum": 0, "maximum": 100},
+    "factors": {"type": "array", "items": {"type": "string"}},
+    "recommendation": {"type": "string"},
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "timestamp": {"type": "string", "format": "date-time"}
+  }
+}
