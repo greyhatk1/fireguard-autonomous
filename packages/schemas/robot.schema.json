@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fireguard.local/schemas/robot.schema.json",
+  "title": "FireGuard Robot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["robot_id", "type", "capabilities", "status", "battery", "connectivity"],
+  "properties": {
+    "robot_id": {"type": "string", "minLength": 1},
+    "type": {"type": "string", "enum": ["drone", "ground_robot"]},
+    "capabilities": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "status": {"type": "string", "enum": ["offline", "idle", "working", "charging", "paused", "fault"]},
+    "battery": {"type": "number", "minimum": 0, "maximum": 100},
+    "connectivity": {"type": "string", "enum": ["connected", "degraded", "disconnected"]},
+    "position": {"type": ["object", "null"], "additionalProperties": false, "properties": {"x": {"type": "number"}, "y": {"type": "number"}, "z": {"type": "number"}}}
+  }
+}
