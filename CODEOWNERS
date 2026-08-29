@@ -1,0 +1,6 @@
+# Initial ownership: repository owner/lead architect.
+# Replace/extend with a dedicated architecture team when available.
+* @greyhatk1
+/docs/architecture/ @greyhatk1
+/docs/agents/ @greyhatk1
+/safety/ @greyhatk1
